@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Demo of customization feature</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- Functions used to display images -->
+<script language='javascript'>
+    // Change the image
+    function bowCustom(image_id, layer_id)
+    {
+        var s = "";
+        s += "<img src=img/" + image_id + ">";
+        layer_id.innerHTML = s;
+    }
+    
+    // Change the image with selection
+    function switchImg(selectObj, name, layer_id)
+    {
+        var id = document.getElementById(selectObj).value;
+        bowCustom(name + id + ".png" ,layer_id);
+    }
+    
+    // Change Tab page
+    function switchTab(tag, box) {
+        for (i = 1; i <= 2; i++) {
+            if (tag == "tab" + i) {
+                document.getElementById(tag).getElementsByTagName("a")[0].className = "on";
+            } else {
+                document.getElementById("tab" + i).getElementsByTagName("a")[0].className = "";
+            }
+            if (box == "con" + i) {
+                document.getElementById(box).style.display = "";
+            } else {
+                document.getElementById("con" + i).style.display = "none";
+            }
+        }
+    }
+    
+    function fun() {
+        var aa = document.getElementById("back_side_index").value;
+        alert(aa);
+    }
+</script>
+<style type='text/css'>
+    *
+    {
+        list-style:none;
+    }
+    #control_panel
+    {
+        text-align:center;
+    }
+    #control_panel li
+    {
+        float: left;
+        margin: 0 10px;
+        text-align: center;
+    }
+    #control_panel a
+    {
+        display: block;
+    }
+    #control_panel a.on
+    {
+        background: #efefef;
+    }
+</style>
+</head>
+<body>
+    <div id='bow_layer'>
+       <div id='back_side_layer' style='position:absolute;'><img src='img/BackSide0.png'></div>
+       <div id='belly_side_layer' style='position:absolute;'><img src='img/BellySide0.png'></div>
+       <img src='img/background.png'>
+    </div>
+    <div id='control_panel'>
+        <ul>
+            <li id='tab1'><a href='#' class='on' onclick="switchTab('tab1','con1');this.blur();">Back Side</a></li>
+            <li id='tab2'><a href='#' onclick="switchTab('tab2','con2');this.blur();">Belly Side</a></li>
+        </ul>
+        <div style='clear: both'></div>
+        <div id='con1' onchange="switchImg('back_side_index', 'BackSide', back_side_layer);">
+            Choose Back Side:
+            <select id='back_side_index'>
+                <option value='0'>
+                    None
+                </option>
+                <option value='1'>
+                    Snakewood - T2
+                </option>
+            </select>                
+        </div>
+        <div id='con2' style="display: none" onchange="switchImg('belly_side_index', 'BellySide', belly_side_layer);">
+            Choose Belly Side:
+            <select id='belly_side_index'>
+                <option value=0>
+                    None
+                </option>
+                <option value=1>
+                    Ebony(Gaboon) - T2
+                </option>
+            </select>
+        </div>
+    </div>
+</body>
+</html>
